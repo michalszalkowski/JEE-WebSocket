@@ -20,11 +20,11 @@ public class JsonWebSocket {
 
 		System.out.println("Received. Subject: " + message.getSubject() + " Received: " + message.getContent());
 
-		session.getBasicRemote().sendObject(new MessageDto("Michał", "Btbw"));
+		session.getBasicRemote().sendObject(new MessageDto("Dto: Michał", "Btbw"));
 
 		for (int i = 0; i < 3; i++) {
 			Thread.sleep(2000);
-			session.getBasicRemote().sendObject(new MessageDto("Michał", "Btbw " + i));
+			session.getBasicRemote().sendObject(new MessageDto("Dto: Michał", "Btbw " + i));
 		}
 	}
 

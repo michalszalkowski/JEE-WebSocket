@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Socket: String Json</title>
+</head>
+<body>
+
+<div>
+    <input type="submit" value="Start" onclick="start()"/>
+</div>
+
+<div id="messages"></div>
+
+<script type="text/javascript">
+
+    var webSocket = new WebSocket('ws://localhost:8080/app/websocket/json/map');
+
+    webSocket.onerror = function (event) {
+        console.log(event);
+        alert('Error');
+    };
+
+    webSocket.onopen = function (event) {
+        console.log(event);
+        alert('Connection established');
+    };
+
+    webSocket.onmessage = function (event) {
+        console.log(event);
+        var json = JSON.parse(event.data);
+        document.getElementById('messages').innerHTML += '<br />' + event.data;
+    };
+
+    function start() {
+        var json = {
+            'subject': "Michał S",
+            'content': "Btbw 2015"
+        };
+        webSocket.send(JSON.stringify(json));
+        return false;
+    }
+</script>
+</body>
+</html>
