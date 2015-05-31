@@ -7,14 +7,14 @@ import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 import java.io.StringReader;
 
-public class MessageDecoder implements Decoder.Text<Message> {
+public class MessageDtoDecoder implements Decoder.Text<MessageDto> {
 
 	@Override
-	public Message decode(String jsonMessage) throws DecodeException {
+	public MessageDto decode(String jsonMessage) throws DecodeException {
 
 		JsonObject jsonObject = Json
 				.createReader(new StringReader(jsonMessage)).readObject();
-		Message message = new Message();
+		MessageDto message = new MessageDto();
 		message.setSubject(jsonObject.getString("subject"));
 		message.setContent(jsonObject.getString("content"));
 		return message;
@@ -33,12 +33,12 @@ public class MessageDecoder implements Decoder.Text<Message> {
 
 	@Override
 	public void init(EndpointConfig ec) {
-		System.out.println("MessageDecoder -init method called");
+		System.out.println("MessageDtoDecoder -init method called");
 	}
 
 	@Override
 	public void destroy() {
-		System.out.println("MessageDecoder - destroy method called");
+		System.out.println("MessageDtoDecoder - destroy method called");
 	}
 
 }

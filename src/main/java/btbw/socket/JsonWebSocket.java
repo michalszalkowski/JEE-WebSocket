@@ -1,8 +1,8 @@
 package btbw.socket;
 
-import btbw.dto.Message;
-import btbw.dto.MessageDecoder;
-import btbw.dto.MessageEncoder;
+import btbw.dto.MessageDto;
+import btbw.dto.MessageDtoDecoder;
+import btbw.dto.MessageDtoEncoder;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -10,21 +10,21 @@ import java.io.IOException;
 
 @ServerEndpoint(
 		value = "/websocket/json",
-		encoders = {MessageEncoder.class},
-		decoders = {MessageDecoder.class}
+		encoders = {MessageDtoEncoder.class},
+		decoders = {MessageDtoDecoder.class}
 )
 public class JsonWebSocket {
 
 	@OnMessage
-	public void onMessage(Message message, Session session) throws IOException, InterruptedException, EncodeException {
+	public void onMessage(MessageDto message, Session session) throws IOException, InterruptedException, EncodeException {
 
 		System.out.println("Received. Subject: " + message.getSubject() + " Received: " + message.getContent());
 
-		session.getBasicRemote().sendObject(new Message("Michał", "Btbw"));
+		session.getBasicRemote().sendObject(new MessageDto("Michał", "Btbw"));
 
 		for (int i = 0; i < 3; i++) {
 			Thread.sleep(2000);
-			session.getBasicRemote().sendObject(new Message("Michał", "Btbw " + i));
+			session.getBasicRemote().sendObject(new MessageDto("Michał", "Btbw " + i));
 		}
 	}
 

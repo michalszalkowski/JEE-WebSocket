@@ -1,14 +1,14 @@
 package btbw.dto;
 
-public class Message {
+public class MessageDto {
 
 	private String subject;
 	private String content;
 
-	public Message() {
+	public MessageDto() {
 	}
 
-	public Message(String subject, String content) {
+	public MessageDto(String subject, String content) {
 		this.subject = subject;
 		this.content = content;
 	}
